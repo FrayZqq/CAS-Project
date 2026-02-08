@@ -17,6 +17,27 @@
       "videos": [],
       "links": [],
       "keywords": []
+    },
+    {
+      "id": "custom-1770566639447",
+      "date": "2026-02-11",
+      "year": 2026,
+      "title": "123",
+      "summary": "123",
+      "categories": [
+        "Sustainability",
+        "Achievements",
+        "Community",
+        "Facilities",
+        "Academics",
+        "Creativity"
+      ],
+      "sustainability": true,
+      "details": "123",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": []
     }
   ]
 }
