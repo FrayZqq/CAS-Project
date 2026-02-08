@@ -12,7 +12,11 @@
         "Creativity"
       ],
       "sustainability": false,
-      "details": "This is a temporary test event."
+      "details": "This is a temporary test event.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": []
     }
   ]
 }
