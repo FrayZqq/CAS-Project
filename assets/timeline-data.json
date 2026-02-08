@@ -3,53 +3,213 @@
   "lastUpdated": "2026-02-08",
   "items": [
     {
-      "id": "custom-1770566685746",
-      "date": "2026-01-27",
-      "year": 2026,
-      "title": "Test",
-      "summary": "summarytext",
+      "id": "kcm-2007-opening",
+      "date": "2007-09-01",
+      "year": 2007,
+      "title": "School Opens in Murcia",
+      "summary": "King's College Murcia opened as the first British school in the Region of Murcia with 65 students.",
       "categories": [
-        "Sustainability",
-        "Achievements",
         "Community",
-        "Facilities",
         "Academics",
-        "Creativity"
-      ],
-      "sustainability": true,
-      "details": "detailstext",
-      "images": [
-        "https://example.org/image.jpg"
-      ],
-      "videos": [
-        "https://youtu.be/xxxx"
-      ],
-      "links": [
-        {
-          "label": "(one per line: Label",
-          "url": "https://example.org)"
-        }
-      ],
-      "keywords": [
-        "keyword",
-        "keyword2"
-      ]
-    },
-    {
-      "id": "test-1770562306",
-      "date": "2026-02-08",
-      "year": 2026,
-      "title": "Test Publish Event",
-      "summary": "Test entry to verify publish flow.",
-      "categories": [
-        "Creativity"
+        "Facilities"
       ],
       "sustainability": false,
-      "details": "This is a temporary test event.",
+      "details": "The school was founded in September 2007 as a joint project between King's Group and Polaris World, becoming the first British educational centre in the Murcia region and initially enrolling 65 students.",
       "images": [],
       "videos": [],
       "links": [],
-      "keywords": []
+      "keywords": [
+        "opening",
+        "foundation",
+        "first british school",
+        "2007"
+      ]
+    },
+    {
+      "id": "kcm-growth-early-years",
+      "date": "2010-06-30",
+      "year": 2010,
+      "title": "Expansion of Student Age Range",
+      "summary": "The school developed into a full educational pathway from early years to sixth form.",
+      "categories": [
+        "Academics",
+        "Facilities"
+      ],
+      "sustainability": false,
+      "details": "King's College Murcia expanded to educate students from approximately 18 months to 18 years old, providing a continuous British-curriculum education through to university preparation.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "early years",
+        "sixth form",
+        "british curriculum"
+      ]
+    },
+    {
+      "id": "kcm-growing-reputation",
+      "date": "2015-09-01",
+      "year": 2015,
+      "title": "International Reputation Strengthens",
+      "summary": "The school gained recognition for academic excellence and strong student outcomes.",
+      "categories": [
+        "Achievements",
+        "Academics"
+      ],
+      "sustainability": false,
+      "details": "Through strong academic results and British-curriculum teaching, the school built a growing international reputation and became a reference educational centre in the Murcia region.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "results",
+        "reputation",
+        "academic excellence"
+      ]
+    },
+    {
+      "id": "kcm-2018-inspection",
+      "date": "2018-10-24",
+      "year": 2018,
+      "title": "External Inspection Confirms Quality",
+      "summary": "Independent inspection evaluated curriculum, teaching, and student development.",
+      "categories": [
+        "Achievements",
+        "Academics"
+      ],
+      "sustainability": false,
+      "details": "An external inspection reviewed the quality of curriculum, teaching and learning, and students' spiritual, moral, social, and cultural development, confirming strong educational standards.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "inspection",
+        "quality assurance",
+        "standards"
+      ]
+    },
+    {
+      "id": "kcm-2019-bso-status",
+      "date": "2019-04-03",
+      "year": 2019,
+      "title": "British Schools Overseas Establishment Status",
+      "summary": "The school was formally listed within the British Schools Overseas framework.",
+      "categories": [
+        "Achievements",
+        "Academics"
+      ],
+      "sustainability": false,
+      "details": "King's College Murcia received official establishment recognition within the British Schools Overseas system, reinforcing its compliance with UK educational standards.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "BSO",
+        "recognition",
+        "UK standards"
+      ]
+    },
+    {
+      "id": "kcm-2020-student-growth",
+      "date": "2020-09-01",
+      "year": 2020,
+      "title": "Student Population Exceeds 500",
+      "summary": "Enrollment surpassed 500 students across all age groups.",
+      "categories": [
+        "Community",
+        "Academics"
+      ],
+      "sustainability": false,
+      "details": "The school grew significantly from its original cohort, reaching more than 500 students aged 18 months to 18 years and strengthening its role in regional education.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "enrollment",
+        "growth",
+        "community"
+      ]
+    },
+    {
+      "id": "kcm-outstanding-inspections",
+      "date": "2022-06-01",
+      "year": 2022,
+      "title": "Outstanding External Inspection Ratings",
+      "summary": "The school achieved 'Outstanding' ratings across inspection categories.",
+      "categories": [
+        "Achievements",
+        "Academics"
+      ],
+      "sustainability": false,
+      "details": "Regular external inspections approved by British Schools Overseas awarded the school an 'Outstanding' rating in all categories, highlighting exceptional teaching and learning quality.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "outstanding",
+        "inspection",
+        "quality"
+      ]
+    },
+    {
+      "id": "kcm-2023-hpl-recognition",
+      "date": "2023-04-26",
+      "year": 2023,
+      "title": "Recognised as World-Class High Performance Learning School",
+      "summary": "King's College Murcia received international HPL distinction.",
+      "categories": [
+        "Achievements",
+        "Academics"
+      ],
+      "sustainability": false,
+      "details": "The school was recognised as a world-class High Performance Learning institution, reflecting strong academic outcomes and development of advanced thinking skills among students.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "HPL",
+        "world class",
+        "recognition"
+      ]
+    },
+    {
+      "id": "kcm-2023-open-day",
+      "date": "2023-01-27",
+      "year": 2023,
+      "title": "Community Open Day Event",
+      "summary": "Families visited the campus to explore facilities and educational approach.",
+      "categories": [
+        "Community"
+      ],
+      "sustainability": false,
+      "details": "An Open Day invited prospective families to meet staff, tour facilities, and learn about the personalised British education offered from early years through sixth form.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "open day",
+        "community",
+        "admissions"
+      ]
+    },
+    {
+      "id": "kcm-2024-leading-school",
+      "date": "2024-02-16",
+      "year": 2024,
+      "title": "Recognition Among Spain's Leading Schools",
+      "summary": "The school was ranked among top institutions in Spain.",
+      "categories": [
+        "Achievements"
+      ],
+      "sustainability": false,
+      "details": "Prestigious publications highlighted King's College Murcia as one of the best schools in Spain, reflecting sustained academic excellence and institutional growth.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "ranking",
+        "top school"
+      ]
     }
   ]
 }
