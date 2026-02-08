@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" class="without-overlay-header">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Interactive Timeline - King's College Murcia</title>
+    <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/profiles/custom/born_ready_profile/themes/born_ready_bs4/css/base/bootstrap.base.css?t58sfm" />
+    <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/profiles/custom/born_ready_profile/themes/born_ready_bs4/css/base/vartheme_bs4.base.css?t58sfm" />
+    <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/profiles/custom/born_ready_profile/themes/born_ready_bs4/css/base/born_ready_bs4.base.css?t58sfm" />
+    <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/themes/custom/born_ready_bs4_school/css/base/base.css?t58sfm" />
+    <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/themes/custom/born_ready_bs4_school/css/components/header.component.css?t58sfm" />
+    <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/themes/custom/born_ready_bs4_school/css/components/footer-theme.css?t58sfm" />
+    <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/sites/school112/files/color/born_ready_bs4_bahamas-573eccf0/colors.css?t58sfm" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body class="bg-light">
+    <svg class="visually-hidden" aria-hidden="true">
+      <defs>
+        <filter id="eco-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="var(--eco, #28a745)" flood-opacity="0.3" />
+        </filter>
+      </defs>
+    </svg>
+    <header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" role="banner">
+      <div class="container align-items-center d-flex">
+        <a class="navbar-brand d-flex align-items-center" href="https://www.murcia.kingscollegeschools.org/" target="_blank" rel="noopener">
+          <img class="default-logo" src="https://d24d7vsshzrslo.cloudfront.net/sites/school112/files/2025-01/King_s_Murcia_Logos_New_PNG_Files.png" alt="King's College Murcia logo" />
+        </a>
+        <div class="ml-auto d-flex align-items-center header-actions">
+          <div class="text-right header-quick-meta">
+            <p class="small text-uppercase text-muted mb-1">CAS Strands - Creativity | Service</p>
+            <p class="font-weight-semibold mb-0">UN Goals: Goal 4, Goal 13</p>
+          </div>
+          <div class="teacher-actions">
+            <button type="button" class="btn btn-outline-primary btn-sm teacher-login-btn" data-teacher-login>Teacher login</button>
+            <div class="teacher-menu" data-teacher-menu hidden>
+              <button type="button" class="btn btn-success btn-sm" data-teacher-add-event>Add event</button>
+              <button type="button" class="btn btn-link btn-sm text-muted" data-teacher-logout>Log out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main id="main-content">
+      <section class="hero container py-5">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <p class="text-uppercase text-muted mb-2">Mission</p>
+            <h1 class="display-4 mb-3">Interactive Timeline - King's College Murcia</h1>
+            <p class="lead mb-4">A data-driven, media-rich record of milestones spotlighting recycling, clean energy, and eco innovation across our community.</p>
+            <ul class="list-inline hero-meta">
+              <li class="list-inline-item badge badge-pill badge-primary">Creativity</li>
+              <li class="list-inline-item badge badge-pill badge-success">Service</li>
+              <li class="list-inline-item badge badge-pill badge-info">Goal 13: Climate Action</li>
+            </ul>
+          </div>
+          <div class="col-md-4 mt-4 mt-md-0">
+            <div class="hero-card p-4 h-100">
+              <p class="text-uppercase text-muted mb-1">Team</p>
+              <p class="mb-2 font-weight-semibold">Lev Belyi &amp; Mark Gruzdev</p>
+              <p class="mb-4 text-muted">Supervisor - Mr. Avle</p>
+              <p class="small text-muted mb-0">Built to educate and inspire the King's College Murcia community with actionable sustainability wins.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="timeline-controls bg-white border-top border-bottom">
+        <div class="container">
+          <div class="controls-bar" role="region" aria-label="Timeline controls">
+            <label class="search-field" for="timeline-search">
+              <svg aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg>
+              <span class="sr-only">Search timeline</span>
+              <input id="timeline-search" type="search" placeholder="Search milestones" autocomplete="off" />
+            </label>
+            <div class="filter-chips" role="toolbar" aria-label="Filter timeline">
+              <button type="button" class="chip" data-filter="All" aria-pressed="true"><svg aria-hidden="true"><use href="assets/icons.svg#icon-filter"></use></svg>All</button>
+              <button type="button" class="chip" data-filter="Sustainability" aria-pressed="false">Sustainability</button>
+              <button type="button" class="chip" data-filter="Achievements" aria-pressed="false">Achievements</button>
+              <button type="button" class="chip" data-filter="Community" aria-pressed="false">Community</button>
+              <button type="button" class="chip" data-filter="Facilities" aria-pressed="false">Facilities</button>
+              <button type="button" class="chip" data-filter="Academics" aria-pressed="false">Academics</button>
+              <button type="button" class="chip" data-filter="Creativity" aria-pressed="false">Creativity</button>
+            </div>
+            <button type="button" class="sort-toggle" data-sort="oldest" aria-pressed="false">
+              <svg aria-hidden="true"><use href="assets/icons.svg#icon-sort"></use></svg>
+              <span class="sort-label">Oldest</span>
+            </button>
+          </div>
+          <div class="state-banner" role="status" aria-live="polite" hidden>
+            <p class="mb-0"><strong>Unable to load the timeline.</strong> <button type="button" class="btn btn-link btn-sm p-0 align-baseline" data-action="retry">Retry</button></p>
+          </div>
+        </div>
+      </section>
+      <section class="timeline-section py-5">
+        <div class="container">
+          <div class="timeline-wrapper" aria-live="polite">
+            <ol class="timeline" role="list" id="timeline-list"></ol>
+          </div>
+          <div class="empty-state text-center" hidden>
+            <div class="empty-illustration" aria-hidden="true"></div>
+            <p class="lead mb-2">No results</p>
+            <p class="text-muted mb-4">Try a different search or clear filters to keep exploring our story.</p>
+            <button type="button" class="btn btn-primary" data-action="clear">Clear filters</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer footer-main-container">
+      <div class="footer-sub-container container py-4">
+        <div class="row align-items-center">
+          <div class="col-md-6 d-flex align-items-center">
+            <img src="https://d24d7vsshzrslo.cloudfront.net/sites/school112/files/2025-03/logo-footer.png" alt="King's College Murcia" class="img-fluid footer-logo" />
+          </div>
+          <div class="col-md-6 text-md-right mt-3 mt-md-0">
+            <p class="mb-1">Built by Lev Belyi &amp; Mark Gruzdev (CAS). Supervised by Mr. Avle.</p>
+            <p class="small text-muted mb-0">&copy; King's College Murcia - Inspired Education</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <noscript>
+      <div class="alert alert-warning m-3" role="alert">
+        JavaScript is required to render the interactive timeline.
+      </div>
+    </noscript>
+    <div class="admin-modal teacher-modal" data-teacher-modal hidden>
+      <div class="admin-modal-backdrop" data-teacher-close></div>
+      <div class="admin-modal-panel teacher-modal-panel" role="dialog" aria-modal="true" aria-labelledby="teacher-login-title">
+        <button type="button" class="admin-modal-close" data-teacher-close aria-label="Close teacher login">
+          <svg aria-hidden="true"><use href="assets/icons.svg#icon-close"></use></svg>
+        </button>
+        <h2 class="h4 mb-2" id="teacher-login-title">Teacher login</h2>
+        <p class="text-muted small mb-3">Log in to add or delete timeline events (unlocks editing on this device).</p>
+        <form class="teacher-login-form" data-teacher-login-form>
+          <label for="teacher-password" class="sr-only">Teacher password</label>
+          <input type="password" id="teacher-password" placeholder="Enter password" autocomplete="current-password" required />
+          <div class="d-flex align-items-center mt-3">
+            <button type="submit" class="btn btn-primary">Log in</button>
+            <button type="button" class="btn btn-link text-muted ml-2" data-teacher-close>Cancel</button>
+          </div>
+          <p class="admin-feedback text-danger mt-2 mb-0" data-teacher-login-feedback hidden>Incorrect password.</p>
+        </form>
+      </div>
+    </div>
+    <div class="admin-modal" data-admin-modal hidden>
+      <div class="admin-modal-backdrop" data-admin-close-modal></div>
+      <div class="admin-modal-panel">
+        <button type="button" class="admin-modal-close" data-admin-close-modal aria-label="Close event form">
+          <svg aria-hidden="true"><use href="assets/icons.svg#icon-close"></use></svg>
+        </button>
+        <h2 class="h4 mb-3">Add a timeline event</h2>
+        <form class="admin-form" data-admin-form>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="admin-title">Event title</label>
+                  <input type="text" id="admin-title" required />
+                </div>
+                <div class="form-group">
+                  <label for="admin-date">Date</label>
+                  <input type="date" id="admin-date" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group full-width">
+                  <label for="admin-summary">Summary</label>
+                  <textarea id="admin-summary" required></textarea>
+                </div>
+                <div class="form-group full-width">
+                  <label for="admin-details">Details</label>
+                  <textarea id="admin-details" required></textarea>
+                </div>
+              </div>
+              <fieldset class="form-group">
+                <legend>Categories</legend>
+                <div class="category-checkboxes">
+                  <label><input type="checkbox" value="Sustainability" /><span>Sustainability</span></label>
+                  <label><input type="checkbox" value="Achievements" /><span>Achievements</span></label>
+                  <label><input type="checkbox" value="Community" /><span>Community</span></label>
+                  <label><input type="checkbox" value="Facilities" /><span>Facilities</span></label>
+                  <label><input type="checkbox" value="Academics" /><span>Academics</span></label>
+                  <label><input type="checkbox" value="Creativity" /><span>Creativity</span></label>
+                </div>
+              </fieldset>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="admin-images">Image URLs (comma or new line)</label>
+                  <textarea id="admin-images" placeholder="https://example.org/image.jpg"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="admin-videos">Video URLs</label>
+                  <textarea id="admin-videos" placeholder="https://youtu.be/xxxx"></textarea>
+                </div>
+              </div>
+              <div class="form-group full-width">
+                <label for="admin-image-files">Upload image files</label>
+                <input type="file" id="admin-image-files" accept="image/*" multiple />
+                <p class="form-text text-muted small mb-2">Drop or select images to embed (stored locally with the timeline).</p>
+                <div class="upload-preview" data-image-previews></div>
+              </div>
+              <div class="form-group full-width">
+                <label for="admin-links">Link buttons (one per line: Label|https://example.org)</label>
+                <textarea id="admin-links" placeholder="Highlights|https://example.org"></textarea>
+              </div>
+              <div class="form-group full-width">
+                <label for="admin-keywords">Keywords (optional)</label>
+                <input type="text" id="admin-keywords" placeholder="comma separated" />
+              </div>
+              <div class="button-row">
+                <button type="submit" class="btn btn-success">Add to timeline</button>
+                <button type="button" class="btn btn-link text-muted" data-admin-close-modal>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>
+
+
