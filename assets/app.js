@@ -1,7 +1,9 @@
 (() => {
   "use strict";
 
-  const SERVER_MODE = window.location.protocol !== "file:";
+  const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+  const isFileProtocol = window.location.protocol === "file:";
+  const SERVER_MODE = isLocalHost && !isFileProtocol;
   const DATA_URL = SERVER_MODE ? "/api/timeline-data" : "assets/timeline-data.json";
   const FILTERS = ["All", "Sustainability", "Achievements", "Community", "Facilities", "Academics", "Creativity"];
   const ADMIN_PASSWORD = "admin";
