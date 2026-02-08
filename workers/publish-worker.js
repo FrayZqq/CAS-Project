@@ -119,6 +119,44 @@ export default {
 
     if (!putRes.ok) {
       const text = await putRes.text();
+      // If the file changed between GET and PUT, retry once with the latest sha.
+      if (putRes.status === 409) {
+        const freshRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, {
+          headers: authHeaders
+        });
+        if (!freshRes.ok) {
+          const freshText = await freshRes.text();
+          return jsonResponse(
+            502,
+            { ok: false, error: "Failed to re-read repo file.", details: freshText },
+            corsHeaders
+          );
+        }
+        const fresh = await freshRes.json();
+        const freshSha = fresh?.sha;
+        if (!freshSha) {
+          return jsonResponse(502, { ok: false, error: "Missing file sha." }, corsHeaders);
+        }
+        const retryRes = await fetch(apiUrl, {
+          method: "PUT",
+          headers: {
+            ...authHeaders,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message,
+            content,
+            sha: freshSha,
+            branch,
+            committer: { name: committerName, email: committerEmail }
+          })
+        });
+        if (!retryRes.ok) {
+          const retryText = await retryRes.text();
+          return jsonResponse(502, { ok: false, error: "Failed to write repo file.", details: retryText }, corsHeaders);
+        }
+        return jsonResponse(200, { ok: true }, corsHeaders);
+      }
       return jsonResponse(502, { ok: false, error: "Failed to write repo file.", details: text }, corsHeaders);
     }
 
