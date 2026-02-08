@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Interactive Timeline - King's College Murcia</title>
+    <meta name="publish-endpoint" content="https://restless-cherry-9477.maincracky.workers.dev/publish" />
     <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/profiles/custom/born_ready_profile/themes/born_ready_bs4/css/base/bootstrap.base.css?t58sfm" />
     <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/profiles/custom/born_ready_profile/themes/born_ready_bs4/css/base/vartheme_bs4.base.css?t58sfm" />
     <link rel="stylesheet" href="https://d24d7vsshzrslo.cloudfront.net/profiles/custom/born_ready_profile/themes/born_ready_bs4/css/base/born_ready_bs4.base.css?t58sfm" />
@@ -214,6 +215,15 @@
                 <button type="button" class="btn btn-outline-secondary btn-sm" data-admin-export>Download updated timeline JSON</button>
                 <span class="text-muted small">Use this file to replace <code>assets/timeline-data.json</code> in GitHub.</span>
               </div>
+              <div class="form-group full-width mt-3">
+                <label for="publish-password">Publish password</label>
+                <input type="password" id="publish-password" placeholder="Set in your publish server" autocomplete="off" />
+              </div>
+              <div class="button-row">
+                <button type="button" class="btn btn-primary" data-admin-publish>Publish to GitHub</button>
+                <span class="text-muted small">Saves for everyone (uses the publish server).</span>
+              </div>
+              <p class="admin-feedback mt-2 mb-0" data-admin-status hidden></p>
             </form>
           </div>
         </div>
