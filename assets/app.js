@@ -39,6 +39,7 @@
   const adminModal = document.querySelector("[data-admin-modal]");
   const adminControls = document.querySelector("[data-admin-controls]");
   const adminStatus = document.querySelector("[data-admin-status]");
+  const adminExportBtn = document.querySelector("[data-admin-export]");
   const adminOpenModalBtn = document.querySelector("[data-admin-open-modal]");
   const adminCloseTriggers = document.querySelectorAll("[data-admin-close-modal]");
   const imageFileInput = document.getElementById("admin-image-files");
@@ -54,6 +55,7 @@
   const teacherModalCloseTriggers = Array.from(document.querySelectorAll("[data-teacher-close]"));
 
 let baseItems = [];
+let baseMeta = { school: "King's College Murcia", lastUpdated: "" };
 let customItems = loadCustomItems();
 let deletedIds = loadDeletedIds();
 let uploadedImages = [];
@@ -150,6 +152,10 @@ let adminUnlocked = loadTeacherUnlocked();
         return response.json();
       })
       .then((payload) => {
+        baseMeta = {
+          school: payload.school || baseMeta.school,
+          lastUpdated: payload.lastUpdated || baseMeta.lastUpdated
+        };
         baseItems = Array.isArray(payload.items) ? payload.items : [];
         state.items = SERVER_MODE ? baseItems : buildVisibleItems();
         state.loaded = true;
@@ -566,6 +572,27 @@ let adminUnlocked = loadTeacherUnlocked();
         renderImagePreviews();
       });
     });
+
+    if (adminExportBtn) {
+      adminExportBtn.addEventListener("click", () => {
+        if (!state.loaded) {
+          if (adminStatus) {
+            adminStatus.textContent = "Load the timeline before exporting.";
+            adminStatus.classList.add("text-danger");
+            adminStatus.hidden = false;
+          }
+          return;
+        }
+        const payload = buildExportPayload();
+        downloadJson("timeline-data.json", payload);
+        if (adminStatus) {
+          adminStatus.textContent = "Downloaded timeline-data.json. Replace assets/timeline-data.json in GitHub and push.";
+          adminStatus.classList.remove("text-danger");
+          adminStatus.hidden = false;
+          setTimeout(() => (adminStatus.hidden = true), 4000);
+        }
+      });
+    }
 
     if (imageFileInput) {
       imageFileInput.addEventListener("change", (event) => {
@@ -996,6 +1023,49 @@ let adminUnlocked = loadTeacherUnlocked();
     }
     state.items = buildVisibleItems();
     requestRender(true);
+  }
+
+  function buildExportPayload() {
+    const items = buildVisibleItems()
+      .map((item) => normalizeItemForExport(item))
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+    const today = new Date().toISOString().slice(0, 10);
+    return {
+      school: baseMeta.school || "King's College Murcia",
+      lastUpdated: today,
+      items
+    };
+  }
+
+  function normalizeItemForExport(item) {
+    const categories = Array.isArray(item.categories) ? item.categories : [];
+    return {
+      id: item.id,
+      date: item.date,
+      year: item.year || new Date(item.date).getFullYear(),
+      title: item.title,
+      summary: item.summary,
+      categories,
+      sustainability: categories.includes("Sustainability"),
+      details: item.details,
+      images: Array.isArray(item.images) ? item.images : [],
+      videos: Array.isArray(item.videos) ? item.videos : [],
+      links: Array.isArray(item.links) ? item.links : [],
+      keywords: Array.isArray(item.keywords) ? item.keywords : []
+    };
+  }
+
+  function downloadJson(filename, payload) {
+    const json = JSON.stringify(payload, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   }
 
   init();
