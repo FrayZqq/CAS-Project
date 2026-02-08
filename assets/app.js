@@ -37,6 +37,8 @@
     sort: document.querySelector(".sort-toggle"),
     chips: document.querySelector(".filter-chips")
   };
+  const updateBanner = document.querySelector("[data-update-banner]");
+  const updateRefreshBtn = document.querySelector("[data-update-refresh]");
   const adminModal = document.querySelector("[data-admin-modal]");
   const adminControls = document.querySelector("[data-admin-controls]");
   const adminStatus = document.querySelector("[data-admin-status]");
@@ -128,6 +130,12 @@ let adminUnlocked = loadTeacherUnlocked();
       controls.banner.hidden = true;
       loadData();
     });
+
+    if (updateRefreshBtn) {
+      updateRefreshBtn.addEventListener("click", () => {
+        window.location.reload();
+      });
+    }
 
     controls.clear.addEventListener("click", () => {
       resetState();
@@ -1141,8 +1149,9 @@ let adminUnlocked = loadTeacherUnlocked();
           if (!data) return;
           const signature = buildPublishSignature(data);
           if (signature && signature === publishSignature) {
-            showToast("Public site updated. Reloading…");
-            setTimeout(() => window.location.reload(), 1000);
+            if (updateBanner) updateBanner.hidden = false;
+            showToast("Public site updated. Click refresh to load.");
+            remaining = 0;
           }
         })
         .catch(() => {
@@ -1171,8 +1180,8 @@ let adminUnlocked = loadTeacherUnlocked();
           if (!data) return;
           const signature = buildPublishSignature(data);
           if (signature && currentSignature && signature !== currentSignature) {
-            showToast("New updates detected. Reloading…");
-            setTimeout(() => window.location.reload(), 1000);
+            if (updateBanner) updateBanner.hidden = false;
+            showToast("New updates detected. Click refresh to load.");
           }
         })
         .catch(() => {
