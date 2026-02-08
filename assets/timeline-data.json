@@ -3,6 +3,39 @@
   "lastUpdated": "2026-02-08",
   "items": [
     {
+      "id": "custom-1770566685746",
+      "date": "2026-01-27",
+      "year": 2026,
+      "title": "Test",
+      "summary": "summarytext",
+      "categories": [
+        "Sustainability",
+        "Achievements",
+        "Community",
+        "Facilities",
+        "Academics",
+        "Creativity"
+      ],
+      "sustainability": true,
+      "details": "detailstext",
+      "images": [
+        "https://example.org/image.jpg"
+      ],
+      "videos": [
+        "https://youtu.be/xxxx"
+      ],
+      "links": [
+        {
+          "label": "(one per line: Label",
+          "url": "https://example.org)"
+        }
+      ],
+      "keywords": [
+        "keyword",
+        "keyword2"
+      ]
+    },
+    {
       "id": "test-1770562306",
       "date": "2026-02-08",
       "year": 2026,
@@ -13,27 +46,6 @@
       ],
       "sustainability": false,
       "details": "This is a temporary test event.",
-      "images": [],
-      "videos": [],
-      "links": [],
-      "keywords": []
-    },
-    {
-      "id": "custom-1770566639447",
-      "date": "2026-02-11",
-      "year": 2026,
-      "title": "123",
-      "summary": "123",
-      "categories": [
-        "Sustainability",
-        "Achievements",
-        "Community",
-        "Facilities",
-        "Academics",
-        "Creativity"
-      ],
-      "sustainability": true,
-      "details": "123",
       "images": [],
       "videos": [],
       "links": [],
