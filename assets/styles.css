@@ -270,6 +270,25 @@ main {
   color: #d9534f;
 }
 
+.publish-toast {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  max-width: min(360px, 90vw);
+  background: #1f2937;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  z-index: 1200;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.publish-toast.is-error {
+  background: #b91c1c;
+}
+
 .admin-locked {
   display: flex;
   flex-direction: column;

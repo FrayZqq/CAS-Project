@@ -43,6 +43,7 @@
   const adminExportBtn = document.querySelector("[data-admin-export]");
   const adminPublishBtn = document.querySelector("[data-admin-publish]");
   const adminOpenModalBtn = document.querySelector("[data-admin-open-modal]");
+  const publishToast = document.getElementById("publish-toast");
   const adminCloseTriggers = document.querySelectorAll("[data-admin-close-modal]");
   const imageFileInput = document.getElementById("admin-image-files");
   const imagePreviewContainer = document.querySelector("[data-image-previews]");
@@ -1082,6 +1083,7 @@ let adminUnlocked = loadTeacherUnlocked();
           adminStatus.classList.add("text-danger");
           adminStatus.hidden = false;
         }
+        showToast("Publish failed. Check the publish server.", true);
       });
   }
 
@@ -1092,7 +1094,18 @@ let adminUnlocked = loadTeacherUnlocked();
       adminStatus.hidden = false;
       setTimeout(() => (adminStatus.hidden = true), 6000);
     }
-    alert("Published to GitHub. It can take 1-2 minutes to update the public site.");
+    showToast("Published to GitHub. It can take 1-2 minutes to update the public site.");
+  }
+
+  function showToast(message, isError = false) {
+    if (!publishToast) return;
+    publishToast.textContent = message;
+    publishToast.classList.toggle("is-error", Boolean(isError));
+    publishToast.hidden = false;
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => {
+      publishToast.hidden = true;
+    }, 6000);
   }
 
   function buildExportPayload() {
