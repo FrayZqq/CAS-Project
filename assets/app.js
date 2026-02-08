@@ -63,6 +63,7 @@ let baseMeta = { school: "King's College Murcia", lastUpdated: "" };
 let customItems = loadCustomItems();
 let deletedIds = loadDeletedIds();
 let publishSignature = null;
+let currentSignature = null;
 let uploadedImages = [];
 let adminUnlocked = loadTeacherUnlocked();
 
@@ -93,6 +94,7 @@ let adminUnlocked = loadTeacherUnlocked();
     applyHashParams();
     hydrateAuthFromServer();
     loadData();
+    if (!SERVER_MODE) startUpdatePolling();
     setupAdminPanel();
     exposeHelpers();
   }
@@ -151,7 +153,7 @@ let adminUnlocked = loadTeacherUnlocked();
 
   function loadData() {
     timelineEl.setAttribute("aria-busy", "true");
-    fetch(DATA_URL)
+    fetch(buildDataUrl(), { cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error("Network error");
         return response.json();
@@ -163,6 +165,7 @@ let adminUnlocked = loadTeacherUnlocked();
         };
         baseItems = Array.isArray(payload.items) ? payload.items : [];
         state.items = SERVER_MODE ? baseItems : buildVisibleItems();
+        currentSignature = buildPublishSignature(payload);
         state.loaded = true;
         state.error = false;
         controls.banner.hidden = true;
@@ -1119,6 +1122,7 @@ let adminUnlocked = loadTeacherUnlocked();
     saveDeletedIds(deletedIds);
     state.items = baseItems;
     requestRender(true);
+    currentSignature = buildPublishSignature({ lastUpdated: baseMeta.lastUpdated, items: baseItems });
   }
 
   function buildPublishSignature(payload) {
@@ -1151,6 +1155,30 @@ let adminUnlocked = loadTeacherUnlocked();
         });
     };
     setTimeout(poll, intervalMs);
+  }
+
+  function buildDataUrl() {
+    return SERVER_MODE ? DATA_URL : `${DATA_URL}?ts=${Date.now()}`;
+  }
+
+  function startUpdatePolling() {
+    setInterval(() => {
+      if (!state.loaded) return;
+      if (customItems.length || deletedIds.length) return; // Don't overwrite local edits.
+      fetch(`${DATA_URL}?ts=${Date.now()}`, { cache: "no-store" })
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (!data) return;
+          const signature = buildPublishSignature(data);
+          if (signature && currentSignature && signature !== currentSignature) {
+            showToast("New updates detected. Reloading…");
+            setTimeout(() => window.location.reload(), 1000);
+          }
+        })
+        .catch(() => {
+          // ignore
+        });
+    }, 120000);
   }
 
   function buildExportPayload() {
