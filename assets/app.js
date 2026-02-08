@@ -161,7 +161,7 @@ let adminUnlocked = loadTeacherUnlocked();
           lastUpdated: payload.lastUpdated || baseMeta.lastUpdated
         };
         baseItems = Array.isArray(payload.items) ? payload.items : [];
-        state.items = SERVER_MODE ? baseItems : buildVisibleItems();
+        state.items = baseItems;
         state.loaded = true;
         state.error = false;
         controls.banner.hidden = true;
@@ -716,34 +716,12 @@ let adminUnlocked = loadTeacherUnlocked();
         return;
       }
 
-      const newItem = {
-        id: `custom-${Date.now()}`,
-        date: fields.date,
-        year: new Date(fields.date).getFullYear(),
-        title: fields.title,
-        summary: fields.summary,
-        categories: fields.categories,
-        details: fields.details,
-        images: payload.images,
-        videos: fields.videos,
-        links: fields.links,
-        keywords: fields.keywords
-      };
-
-      customItems.push(newItem);
-      saveCustomItems(customItems);
-      state.items = buildVisibleItems();
-      requestRender(true);
-      adminForm.reset();
-      uploadedImages = [];
-      renderImagePreviews();
-      adminModal.hidden = true;
       if (adminStatus) {
-        adminStatus.textContent = "Event added!";
-        adminStatus.classList.remove("text-danger");
+        adminStatus.textContent = "Local edits are disabled on the public site. Use Publish to GitHub to save for everyone.";
+        adminStatus.classList.add("text-danger");
         adminStatus.hidden = false;
-        setTimeout(() => (adminStatus.hidden = true), 2000);
       }
+      return;
     });
   }
 
@@ -1028,8 +1006,7 @@ let adminUnlocked = loadTeacherUnlocked();
   }
 
   function buildVisibleItems() {
-    const baseVisible = baseItems.filter((item) => !deletedIds.includes(item.id));
-    return [...baseVisible, ...customItems];
+    return baseItems;
   }
 
   function deleteEventById(id) {
@@ -1039,18 +1016,11 @@ let adminUnlocked = loadTeacherUnlocked();
       });
       return;
     }
-    const customIndex = customItems.findIndex((item) => item.id === id);
-    if (customIndex > -1) {
-      customItems.splice(customIndex, 1);
-      saveCustomItems(customItems);
-    } else {
-      if (!deletedIds.includes(id)) {
-        deletedIds.push(id);
-        saveDeletedIds(deletedIds);
-      }
+    if (adminStatus) {
+      adminStatus.textContent = "Local deletes are disabled on the public site.";
+      adminStatus.classList.add("text-danger");
+      adminStatus.hidden = false;
     }
-    state.items = buildVisibleItems();
-    requestRender(true);
   }
 
   function publishTimeline(payload, password) {
