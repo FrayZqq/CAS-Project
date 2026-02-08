@@ -62,6 +62,7 @@ let baseItems = [];
 let baseMeta = { school: "King's College Murcia", lastUpdated: "" };
 let customItems = loadCustomItems();
 let deletedIds = loadDeletedIds();
+let publishSignature = null;
 let uploadedImages = [];
 let adminUnlocked = loadTeacherUnlocked();
 
@@ -161,7 +162,7 @@ let adminUnlocked = loadTeacherUnlocked();
           lastUpdated: payload.lastUpdated || baseMeta.lastUpdated
         };
         baseItems = Array.isArray(payload.items) ? payload.items : [];
-        state.items = baseItems;
+        state.items = SERVER_MODE ? baseItems : buildVisibleItems();
         state.loaded = true;
         state.error = false;
         controls.banner.hidden = true;
@@ -716,12 +717,34 @@ let adminUnlocked = loadTeacherUnlocked();
         return;
       }
 
+      const newItem = {
+        id: `custom-${Date.now()}`,
+        date: fields.date,
+        year: new Date(fields.date).getFullYear(),
+        title: fields.title,
+        summary: fields.summary,
+        categories: fields.categories,
+        details: fields.details,
+        images: payload.images,
+        videos: fields.videos,
+        links: fields.links,
+        keywords: fields.keywords
+      };
+
+      customItems.push(newItem);
+      saveCustomItems(customItems);
+      state.items = buildVisibleItems();
+      requestRender(true);
+      adminForm.reset();
+      uploadedImages = [];
+      renderImagePreviews();
+      adminModal.hidden = true;
       if (adminStatus) {
-        adminStatus.textContent = "Local edits are disabled on the public site. Use Publish to GitHub to save for everyone.";
-        adminStatus.classList.add("text-danger");
+        adminStatus.textContent = "Event added! (Not published yet)";
+        adminStatus.classList.remove("text-danger");
         adminStatus.hidden = false;
+        setTimeout(() => (adminStatus.hidden = true), 2000);
       }
-      return;
     });
   }
 
@@ -1006,7 +1029,8 @@ let adminUnlocked = loadTeacherUnlocked();
   }
 
   function buildVisibleItems() {
-    return baseItems;
+    const baseVisible = baseItems.filter((item) => !deletedIds.includes(item.id));
+    return [...baseVisible, ...customItems];
   }
 
   function deleteEventById(id) {
@@ -1016,11 +1040,18 @@ let adminUnlocked = loadTeacherUnlocked();
       });
       return;
     }
-    if (adminStatus) {
-      adminStatus.textContent = "Local deletes are disabled on the public site.";
-      adminStatus.classList.add("text-danger");
-      adminStatus.hidden = false;
+    const customIndex = customItems.findIndex((item) => item.id === id);
+    if (customIndex > -1) {
+      customItems.splice(customIndex, 1);
+      saveCustomItems(customItems);
+    } else {
+      if (!deletedIds.includes(id)) {
+        deletedIds.push(id);
+        saveDeletedIds(deletedIds);
+      }
     }
+    state.items = buildVisibleItems();
+    requestRender(true);
   }
 
   function publishTimeline(payload, password) {
@@ -1045,7 +1076,7 @@ let adminUnlocked = loadTeacherUnlocked();
           }
           return;
         }
-        showPublishSuccess();
+        showPublishSuccess(payload);
       })
       .catch(() => {
         if (adminStatus) {
@@ -1057,14 +1088,17 @@ let adminUnlocked = loadTeacherUnlocked();
       });
   }
 
-  function showPublishSuccess() {
+  function showPublishSuccess(payload) {
     if (adminStatus) {
       adminStatus.textContent = "Published to GitHub. It can take 1-2 minutes to update the public site.";
       adminStatus.classList.remove("text-danger");
       adminStatus.hidden = false;
       setTimeout(() => (adminStatus.hidden = true), 6000);
     }
-    showToast("Published to GitHub. It can take 1-2 minutes to update the public site.");
+    showToast("Published to GitHub. Updating public site (about 1-2 minutes).");
+    clearLocalEdits();
+    publishSignature = buildPublishSignature(payload);
+    pollForPublishUpdate(12, 10000);
   }
 
   function showToast(message, isError = false) {
@@ -1076,6 +1110,47 @@ let adminUnlocked = loadTeacherUnlocked();
     showToast._timer = setTimeout(() => {
       publishToast.hidden = true;
     }, 6000);
+  }
+
+  function clearLocalEdits() {
+    customItems = [];
+    deletedIds = [];
+    saveCustomItems(customItems);
+    saveDeletedIds(deletedIds);
+    state.items = baseItems;
+    requestRender(true);
+  }
+
+  function buildPublishSignature(payload) {
+    if (!payload) return null;
+    return `${payload.lastUpdated || ""}|${Array.isArray(payload.items) ? payload.items.length : 0}`;
+  }
+
+  function pollForPublishUpdate(attempts, intervalMs) {
+    if (!publishSignature) return;
+    let remaining = attempts;
+    const poll = () => {
+      remaining -= 1;
+      fetch(`assets/timeline-data.json?ts=${Date.now()}`, { cache: "no-store" })
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (!data) return;
+          const signature = buildPublishSignature(data);
+          if (signature && signature === publishSignature) {
+            showToast("Public site updated. Reloading…");
+            setTimeout(() => window.location.reload(), 1000);
+          }
+        })
+        .catch(() => {
+          // ignore
+        })
+        .finally(() => {
+          if (remaining > 0) {
+            setTimeout(poll, intervalMs);
+          }
+        });
+    };
+    setTimeout(poll, intervalMs);
   }
 
   function buildExportPayload() {
