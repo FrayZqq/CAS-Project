@@ -215,7 +215,10 @@
                 <button type="button" class="btn btn-outline-secondary btn-sm" data-admin-export>Download updated timeline JSON</button>
                 <span class="text-muted small">Use this file to replace <code>assets/timeline-data.json</code> in GitHub.</span>
               </div>
-              <div class="form-group full-width mt-3">
+            </form>
+            <div class="publish-panel mt-4">
+              <h3 class="h6 text-uppercase text-muted mb-2">Publish changes</h3>
+              <div class="form-group full-width">
                 <label for="publish-password">Publish password</label>
                 <input type="password" id="publish-password" placeholder="Set in your publish server" autocomplete="off" />
               </div>
@@ -224,7 +227,7 @@
                 <span class="text-muted small">Saves for everyone (uses the publish server).</span>
               </div>
               <p class="admin-feedback mt-2 mb-0" data-admin-status hidden></p>
-            </form>
+            </div>
           </div>
         </div>
     <div class="publish-toast" id="publish-toast" role="status" aria-live="polite" hidden></div>
