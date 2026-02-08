@@ -1074,12 +1074,7 @@ let adminUnlocked = loadTeacherUnlocked();
           }
           return;
         }
-        if (adminStatus) {
-          adminStatus.textContent = "Published to GitHub.";
-          adminStatus.classList.remove("text-danger");
-          adminStatus.hidden = false;
-          setTimeout(() => (adminStatus.hidden = true), 4000);
-        }
+        showPublishSuccess();
       })
       .catch(() => {
         if (adminStatus) {
@@ -1088,6 +1083,16 @@ let adminUnlocked = loadTeacherUnlocked();
           adminStatus.hidden = false;
         }
       });
+  }
+
+  function showPublishSuccess() {
+    if (adminStatus) {
+      adminStatus.textContent = "Published to GitHub. It can take 1-2 minutes to update the public site.";
+      adminStatus.classList.remove("text-danger");
+      adminStatus.hidden = false;
+      setTimeout(() => (adminStatus.hidden = true), 6000);
+    }
+    alert("Published to GitHub. It can take 1-2 minutes to update the public site.");
   }
 
   function buildExportPayload() {
