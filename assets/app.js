@@ -7,6 +7,7 @@
   const DATA_URL = SERVER_MODE ? "/api/timeline-data" : "assets/timeline-data.json";
   const FILTERS = ["All", "Sustainability", "Achievements", "Community", "Facilities", "Academics", "Creativity"];
   const ADMIN_PASSWORD = "admin";
+  const PUBLISH_ENDPOINT = document.querySelector('meta[name="publish-endpoint"]')?.content?.trim() || "";
   const TEACHER_UNLOCK_STORAGE_KEY = "kcm.timeline.teacherUnlocked";
   const CUSTOM_STORAGE_KEY = "kcm.timeline.customItems";
   const DELETED_STORAGE_KEY = "kcm.timeline.deletedItems";
@@ -40,10 +41,12 @@
   const adminControls = document.querySelector("[data-admin-controls]");
   const adminStatus = document.querySelector("[data-admin-status]");
   const adminExportBtn = document.querySelector("[data-admin-export]");
+  const adminPublishBtn = document.querySelector("[data-admin-publish]");
   const adminOpenModalBtn = document.querySelector("[data-admin-open-modal]");
   const adminCloseTriggers = document.querySelectorAll("[data-admin-close-modal]");
   const imageFileInput = document.getElementById("admin-image-files");
   const imagePreviewContainer = document.querySelector("[data-image-previews]");
+  const publishPasswordInput = document.getElementById("publish-password");
   const teacherLoginButtons = Array.from(document.querySelectorAll("[data-teacher-login]"));
   const teacherMenu = document.querySelector("[data-teacher-menu]");
   const teacherAddEventBtn = document.querySelector("[data-teacher-add-event]");
@@ -594,6 +597,30 @@ let adminUnlocked = loadTeacherUnlocked();
       });
     }
 
+    if (adminPublishBtn) {
+      adminPublishBtn.addEventListener("click", () => {
+        if (!PUBLISH_ENDPOINT) {
+          if (adminStatus) {
+            adminStatus.textContent = "Publish endpoint not set. Add it to the meta tag in index.html.";
+            adminStatus.classList.add("text-danger");
+            adminStatus.hidden = false;
+          }
+          return;
+        }
+        const password = (publishPasswordInput?.value || "").trim();
+        if (!password) {
+          if (adminStatus) {
+            adminStatus.textContent = "Enter the publish password.";
+            adminStatus.classList.add("text-danger");
+            adminStatus.hidden = false;
+          }
+          return;
+        }
+        const payload = buildExportPayload();
+        publishTimeline(payload, password);
+      });
+    }
+
     if (imageFileInput) {
       imageFileInput.addEventListener("change", (event) => {
         const files = Array.from(event.target.files || []);
@@ -1023,6 +1050,44 @@ let adminUnlocked = loadTeacherUnlocked();
     }
     state.items = buildVisibleItems();
     requestRender(true);
+  }
+
+  function publishTimeline(payload, password) {
+    if (adminStatus) {
+      adminStatus.textContent = "Publishing...";
+      adminStatus.classList.remove("text-danger");
+      adminStatus.hidden = false;
+    }
+    fetch(PUBLISH_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password, data: payload })
+    })
+      .then((response) => response.json().then((data) => ({ ok: response.ok, data })))
+      .then(({ ok, data }) => {
+        if (!ok) {
+          const message = data?.error || "Publish failed.";
+          if (adminStatus) {
+            adminStatus.textContent = message;
+            adminStatus.classList.add("text-danger");
+            adminStatus.hidden = false;
+          }
+          return;
+        }
+        if (adminStatus) {
+          adminStatus.textContent = "Published to GitHub.";
+          adminStatus.classList.remove("text-danger");
+          adminStatus.hidden = false;
+          setTimeout(() => (adminStatus.hidden = true), 4000);
+        }
+      })
+      .catch(() => {
+        if (adminStatus) {
+          adminStatus.textContent = "Publish failed. Check the publish server.";
+          adminStatus.classList.add("text-danger");
+          adminStatus.hidden = false;
+        }
+      });
   }
 
   function buildExportPayload() {

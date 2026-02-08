@@ -24,6 +24,13 @@ To change the teacher password on a server, set an environment variable before s
 - The modal captures title, date, summary/details, categories, media URLs, uploaded image files, and link buttons. Selecting the Sustainability category automatically adds the eco highlight.
 - If you open the page via `http(s)://...`, entries + deletions are stored on the server. If you open `index.html` directly (file://), entries are stored only in that browser.
 
+## GitHub Pages publish flow (edits saved for everyone)
+GitHub Pages is static, so the site cannot commit directly on its own. Use the publish worker:
+1. Set up the Cloudflare Worker in `workers/README.md`.
+2. Put your Worker URL into the meta tag in `index.html`:
+   `<meta name="publish-endpoint" content="https://YOUR_SUBDOMAIN.workers.dev/publish" />`
+3. On the site, log in → make edits → click “Publish to GitHub”.
+
 ## Developer helpers
 The page exposes `window.KCM.timeline` with:
 - `setFilter(value)` - apply any of the chip filters.
