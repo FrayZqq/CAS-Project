@@ -1,5 +1,18 @@
 {
   "school": "King's College Murcia",
   "lastUpdated": "2026-02-08",
-  "items": []
+  "items": [
+    {
+      "id": "test-1770562306",
+      "date": "2026-02-08",
+      "year": 2026,
+      "title": "Test Publish Event",
+      "summary": "Test entry to verify publish flow.",
+      "categories": [
+        "Creativity"
+      ],
+      "sustainability": false,
+      "details": "This is a temporary test event."
+    }
+  ]
 }
