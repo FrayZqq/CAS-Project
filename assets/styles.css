@@ -270,6 +270,21 @@ main {
   color: #d9534f;
 }
 
+.publish-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.publish-inline input {
+  height: 32px;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 0.35rem;
+  min-width: 180px;
+}
+
 .publish-toast {
   position: fixed;
   right: 1.5rem;

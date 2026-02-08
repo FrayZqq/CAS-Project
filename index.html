@@ -36,6 +36,11 @@
             <button type="button" class="btn btn-outline-primary btn-sm teacher-login-btn" data-teacher-login>Teacher login</button>
             <div class="teacher-menu" data-teacher-menu hidden>
               <button type="button" class="btn btn-success btn-sm" data-teacher-add-event>Add event</button>
+              <div class="publish-inline">
+                <input type="password" id="publish-password" placeholder="Publish password" autocomplete="off" />
+                <button type="button" class="btn btn-primary btn-sm" data-admin-publish>Publish to GitHub</button>
+              </div>
+              <p class="admin-feedback mt-2 mb-0" data-admin-status hidden></p>
               <button type="button" class="btn btn-link btn-sm text-muted" data-teacher-logout>Log out</button>
             </div>
           </div>
@@ -216,18 +221,6 @@
                 <span class="text-muted small">Use this file to replace <code>assets/timeline-data.json</code> in GitHub.</span>
               </div>
             </form>
-            <div class="publish-panel mt-4">
-              <h3 class="h6 text-uppercase text-muted mb-2">Publish changes</h3>
-              <div class="form-group full-width">
-                <label for="publish-password">Publish password</label>
-                <input type="password" id="publish-password" placeholder="Set in your publish server" autocomplete="off" />
-              </div>
-              <div class="button-row">
-                <button type="button" class="btn btn-primary" data-admin-publish>Publish to GitHub</button>
-                <span class="text-muted small">Saves for everyone (uses the publish server).</span>
-              </div>
-              <p class="admin-feedback mt-2 mb-0" data-admin-status hidden></p>
-            </div>
           </div>
         </div>
     <div class="publish-toast" id="publish-toast" role="status" aria-live="polite" hidden></div>
