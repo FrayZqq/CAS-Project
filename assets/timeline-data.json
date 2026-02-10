@@ -1,6 +1,6 @@
 {
   "school": "King's College Murcia",
-  "lastUpdated": "2026-02-08",
+  "lastUpdated": "2026-02-10",
   "items": [
     {
       "id": "kcm-2007-opening",
@@ -152,6 +152,26 @@
       ]
     },
     {
+      "id": "kcm-2023-open-day",
+      "date": "2023-01-27",
+      "year": 2023,
+      "title": "Community Open Day Event",
+      "summary": "Families visited the campus to explore facilities and educational approach.",
+      "categories": [
+        "Community"
+      ],
+      "sustainability": false,
+      "details": "An Open Day invited prospective families to meet staff, tour facilities, and learn about the personalised British education offered from early years through sixth form.",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": [
+        "open day",
+        "community",
+        "admissions"
+      ]
+    },
+    {
       "id": "kcm-2023-hpl-recognition",
       "date": "2023-04-26",
       "year": 2023,
@@ -173,26 +193,6 @@
       ]
     },
     {
-      "id": "kcm-2023-open-day",
-      "date": "2023-01-27",
-      "year": 2023,
-      "title": "Community Open Day Event",
-      "summary": "Families visited the campus to explore facilities and educational approach.",
-      "categories": [
-        "Community"
-      ],
-      "sustainability": false,
-      "details": "An Open Day invited prospective families to meet staff, tour facilities, and learn about the personalised British education offered from early years through sixth form.",
-      "images": [],
-      "videos": [],
-      "links": [],
-      "keywords": [
-        "open day",
-        "community",
-        "admissions"
-      ]
-    },
-    {
       "id": "kcm-2024-leading-school",
       "date": "2024-02-16",
       "year": 2024,
@@ -210,6 +210,24 @@
         "ranking",
         "top school"
       ]
+    },
+    {
+      "id": "custom-1770734101673",
+      "date": "2026-02-03",
+      "year": 2026,
+      "title": "123",
+      "summary": "123123",
+      "categories": [
+        "Sustainability",
+        "Community",
+        "Academics"
+      ],
+      "sustainability": true,
+      "details": "123",
+      "images": [],
+      "videos": [],
+      "links": [],
+      "keywords": []
     }
   ]
 }
