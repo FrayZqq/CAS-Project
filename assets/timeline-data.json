@@ -1,6 +1,6 @@
 {
   "school": "King's College Murcia",
-  "lastUpdated": "2026-03-01",
+  "lastUpdated": "2026-03-13",
   "items": [
     {
       "id": "kcm-2007-opening",
@@ -210,45 +210,6 @@
         "ranking",
         "top school"
       ]
-    },
-    {
-      "id": "custom-1770734101673",
-      "date": "2026-02-03",
-      "year": 2026,
-      "title": "123",
-      "summary": "123123",
-      "categories": [
-        "Sustainability",
-        "Community",
-        "Academics"
-      ],
-      "sustainability": true,
-      "details": "123",
-      "images": [],
-      "videos": [],
-      "links": [],
-      "keywords": []
-    },
-    {
-      "id": "custom-1772367578638",
-      "date": "2026-02-05",
-      "year": 2026,
-      "title": "test #67",
-      "summary": "67",
-      "categories": [
-        "Sustainability",
-        "Achievements",
-        "Community",
-        "Facilities",
-        "Academics",
-        "Creativity"
-      ],
-      "sustainability": true,
-      "details": "67",
-      "images": [],
-      "videos": [],
-      "links": [],
-      "keywords": []
     }
   ]
 }
