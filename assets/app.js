@@ -6,7 +6,12 @@
   const SERVER_MODE = isLocalHost && !isFileProtocol;
   const DATA_URL = SERVER_MODE ? "/api/timeline-data" : "assets/timeline-data.json";
   const FILTERS = ["All", "Sustainability", "Achievements", "Community", "Facilities", "Academics", "Creativity"];
-  const ADMIN_PASSWORD = "admin";
+  const OFFLINE_ADMIN_HASH_PARTS = Object.freeze([
+    "95ffb82e4d7b1d8c",
+    "c11c5f57e88f22e5",
+    "dfcdbe74b432a52f",
+    "3256b206d17445d0"
+  ]);
   const PUBLISH_ENDPOINT = document.querySelector('meta[name="publish-endpoint"]')?.content?.trim() || "";
   const TEACHER_UNLOCK_STORAGE_KEY = "kcm.timeline.teacherUnlocked";
   const CUSTOM_STORAGE_KEY = "kcm.timeline.customItems";
@@ -786,7 +791,7 @@ let adminUnlocked = loadTeacherUnlocked();
     }
 
     if (teacherLoginForm) {
-      teacherLoginForm.addEventListener("submit", (event) => {
+      teacherLoginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const pass = (teacherPasswordInput?.value || "").trim();
         if (!pass) return;
@@ -808,7 +813,8 @@ let adminUnlocked = loadTeacherUnlocked();
           return;
         }
 
-        if (pass === ADMIN_PASSWORD) {
+        const passHash = await sha256Hex(pass);
+        if (passHash && passHash === getOfflineAdminHash()) {
           if (teacherLoginFeedback) teacherLoginFeedback.hidden = true;
           closeTeacherModal();
           setAdminUnlocked(true);
@@ -872,6 +878,17 @@ let adminUnlocked = loadTeacherUnlocked();
     } catch (error) {
       // ignore storage errors (private mode, quota, etc.)
     }
+  }
+
+  function getOfflineAdminHash() {
+    return OFFLINE_ADMIN_HASH_PARTS.join("");
+  }
+
+  async function sha256Hex(value) {
+    if (!window.crypto?.subtle) return "";
+    const encoded = new TextEncoder().encode(String(value));
+    const digest = await window.crypto.subtle.digest("SHA-256", encoded);
+    return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
   }
 
   function hydrateAuthFromServer() {

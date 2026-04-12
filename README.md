@@ -11,15 +11,16 @@ Browsers can't write files directly into your project directory. For shared (ser
 
 Uploads are saved into `img/uploads/` and events are saved into `data/custom-items.json` + `data/deleted-ids.json`.
 
-To change the teacher password on a server, set an environment variable before starting:
-- PowerShell: `$env:ADMIN_PASSWORD='your-strong-password'; node server.js`
+To change the teacher password on a server, set either a plaintext env var (hashed in memory) or a precomputed SHA-256 hash:
+- PowerShell plaintext: `$env:ADMIN_PASSWORD='your-strong-password'; node server.js`
+- PowerShell hash: `$env:ADMIN_PASSWORD_HASH='your_sha256_hex'; node server.js`
 
 ## Keyboard & accessibility
 - `Tab` / `Shift + Tab` move through filters, cards, and the inline media chips.
 - Media chips are actual links, so `Enter` opens the target (image/link/video) in a new tab.
 
 ## Teacher panel
-- Use the `Teacher login` button in the top-right and enter password `admin` (or whatever `ADMIN_PASSWORD` is on your server).
+- Use the `Teacher login` button in the top-right and enter password `Kings321` by default (or whatever `ADMIN_PASSWORD` / `ADMIN_PASSWORD_HASH` is on your server).
 - After logging in, you can use the header `Add event` button (and `Log out` when done).
 - The modal captures title, date, summary/details, categories, media URLs, uploaded image files, and link buttons. Selecting the Sustainability category automatically adds the eco highlight.
 - If you open the page via `http(s)://...`, entries + deletions are stored on the server. If you open `index.html` directly (file://), entries are stored only in that browser.

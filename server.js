@@ -5,7 +5,7 @@ const http = require("node:http");
 const fs = require("node:fs");
 const fsp = require("node:fs/promises");
 const path = require("node:path");
-const { randomUUID } = require("node:crypto");
+const { createHash, randomUUID, timingSafeEqual } = require("node:crypto");
 
 const ROOT_DIR = process.cwd();
 const PORT = Number(process.env.PORT || 3000);
@@ -14,7 +14,8 @@ const MAX_BODY_BYTES = 25 * 1024 * 1024; // 25MB
 const DATA_DIR = path.join(ROOT_DIR, "data");
 const CUSTOM_ITEMS_PATH = path.join(DATA_DIR, "custom-items.json");
 const DELETED_IDS_PATH = path.join(DATA_DIR, "deleted-ids.json");
-const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || "admin");
+const DEFAULT_ADMIN_PASSWORD_HASH_PARTS = ["95ffb82e4d7b1d8c", "c11c5f57e88f22e5", "dfcdbe74b432a52f", "3256b206d17445d0"];
+const ADMIN_PASSWORD_HASH = resolveAdminPasswordHash();
 const SESSION_COOKIE = "kcm_session";
 const sessions = new Set();
 
@@ -52,6 +53,27 @@ function parseCookies(headerValue) {
     result[k] = decodeURIComponent(rest.join("=") || "");
   });
   return result;
+}
+
+function sha256Hex(value) {
+  return createHash("sha256").update(String(value), "utf8").digest("hex");
+}
+
+function safeEqualText(left, right) {
+  const a = Buffer.from(String(left), "utf8");
+  const b = Buffer.from(String(right), "utf8");
+  if (a.length !== b.length) return false;
+  return timingSafeEqual(a, b);
+}
+
+function resolveAdminPasswordHash() {
+  const envHash = String(process.env.ADMIN_PASSWORD_HASH || "").trim().toLowerCase();
+  if (envHash) return envHash;
+
+  const envPassword = String(process.env.ADMIN_PASSWORD || "").trim();
+  if (envPassword) return sha256Hex(envPassword);
+
+  return DEFAULT_ADMIN_PASSWORD_HASH_PARTS.join("");
 }
 
 function isLoggedIn(req) {
@@ -214,7 +236,8 @@ async function handleLogin(req, res) {
   if (!payload) return;
 
   const pass = String(payload.password || "").trim();
-  if (!pass || pass !== ADMIN_PASSWORD) {
+  const passHash = sha256Hex(pass);
+  if (!pass || !safeEqualText(passHash, ADMIN_PASSWORD_HASH)) {
     sendJson(res, 401, { ok: false, error: "Incorrect password." });
     return;
   }
