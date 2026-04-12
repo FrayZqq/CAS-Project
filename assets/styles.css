@@ -129,6 +129,10 @@ main {
 .admin-modal input,
 .admin-modal textarea,
 .admin-modal select {
+  width: 100%;
+  display: block;
+  color: inherit;
+  font-family: inherit;
   border-radius: 18px !important;
   border: 1px solid var(--border-soft) !important;
   background: #f5f7fb !important;
@@ -183,6 +187,12 @@ main {
   gap: 0.75rem;
 }
 
+.admin-form .category-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
 .admin-card .category-checkboxes label {
   cursor: pointer;
   position: relative;
@@ -190,7 +200,20 @@ main {
   font-size: 0.85rem;
 }
 
+.admin-form .category-checkboxes label {
+  cursor: pointer;
+  position: relative;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
 .admin-card .category-checkboxes label input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.admin-form .category-checkboxes label input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
@@ -208,7 +231,26 @@ main {
   box-shadow: 0 6px 12px rgba(20, 50, 86, 0.08);
 }
 
+.admin-form .category-checkboxes label span {
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #fff;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 12px rgba(20, 50, 86, 0.08);
+}
+
 .admin-card .category-checkboxes label input:checked + span {
+  background: #143256;
+  color: #fff;
+  border-color: #143256;
+  box-shadow: 0 10px 20px rgba(20, 50, 86, 0.25);
+}
+
+.admin-form .category-checkboxes label input:checked + span {
   background: #143256;
   color: #fff;
   border-color: #143256;
@@ -227,6 +269,19 @@ main {
   padding: 0.75rem;
   border-radius: 18px;
   background: #f5f7fb;
+}
+
+#admin-image-files::file-selector-button {
+  border: 1px solid #143256;
+  background: #143256;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  margin-right: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 .upload-thumb {
