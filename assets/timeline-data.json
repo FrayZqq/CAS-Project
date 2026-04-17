@@ -1,6 +1,6 @@
 {
   "school": "King's College Murcia",
-  "lastUpdated": "2026-03-27",
+  "lastUpdated": "2026-04-17",
   "items": [
     {
       "id": "kcm-2007-opening",
@@ -210,23 +210,6 @@
         "ranking",
         "top school"
       ]
-    },
-    {
-      "id": "custom-1774606426543",
-      "date": "2026-03-27",
-      "year": 2026,
-      "title": "Mark Gruzdevs BDay",
-      "summary": "Happy birthday Mark!",
-      "categories": [
-        "Achievements",
-        "Community"
-      ],
-      "sustainability": false,
-      "details": "Mark is 17",
-      "images": [],
-      "videos": [],
-      "links": [],
-      "keywords": []
     }
   ]
 }
